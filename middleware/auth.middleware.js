@@ -5,7 +5,7 @@ export const generateToken = (user) => {
     const payload = {
         userId: user._id,
         name: user.name,
-        mobile: user.mobileNumber,
+        mobileNumber: user.mobileNumber,
         dob: user.dob,
         panNumber: user.panNumber,
     };
