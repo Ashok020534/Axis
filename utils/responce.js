@@ -27,3 +27,25 @@ export const errorResponse = (res, err, statusCode = 500, message = "Something w
         responseCode: statusCode,
     });
 };
+export const multiMessageResponse = (res, messages = [], statusCode = 200, data = {}) => {
+    const formattedMessages = messages.map(msg => {
+        if (typeof msg === 'object' && msg !== null) {
+            return {
+                title: typeof msg.title === 'string' ? msg.title : (typeof msg.body === 'string' ? msg.body : ""),
+                body: typeof msg.body === 'string' ? msg.body : (typeof msg.title === 'string' ? msg.title : "")
+            };
+        } else {
+            return {
+                title: msg,
+                body: ""
+            };
+        }
+    });
+
+    return res.status(statusCode).json({
+        isSuccess: true,
+        message: formattedMessages,
+        data,
+        responseCode: statusCode,
+    }); 
+};
